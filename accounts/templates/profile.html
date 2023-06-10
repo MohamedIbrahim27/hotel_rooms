@@ -1,0 +1,240 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+SOUQ/Profile/{{profile.user.username}}
+{% endblock %}
+{% block body %}
+<div class="hero-wrap js-fullheight" style="background-image: url( {% static 'images/bg_2.jpg' %});">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+            data-scrollax-parent="true">
+            <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
+                        class="mr-2"><a href="{% url 'settings:home' %}">Home</a></span> <span>Profile</span></p>
+                <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Profile</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<main class="pt-4">
+    <div class="container dark-grey-text mt-5">
+        <div class="row row120 ">
+            <div class="container ">
+                <div class="row mt-5">
+                    <div class="profile-imgg col-md-12">
+                        {% if profile.image %}
+                        <img class="profile-img" src="{{profile.image.url}}" alt="card-img-top">
+                        {% else %}
+                        <img class="profile-img-defult" src="{% static 'img/user_no_image.png' %}" alt="card-img-top">
+
+                        {% endif %}
+
+                    </div>
+                    <div class="info mt-4 col-md-12">
+                        <h6><i class="fa-solid fa-signature"></i> Name : {{profile.user.first_name}}
+                            {{profile.user.last_name}} </h6>
+                        <h6><i class="fa-solid fa-envelope"></i> Email : {{profile.user.email}} </h6>
+                        <h6><i class="fa-solid fa-phone"></i> Phone : {{profile.phone}} </h6>
+                        <h6><i class="fa-solid fa-earth-americas"></i> Country : {{profile.country.name}} </h6>
+                        <h6><i class="fa-sharp fa-solid fa-city"></i> City : {{profile.adress}} </h6>
+                        <a href="{% url 'accounts:edit' slug=user.profile.slug%}"></a>
+                        <a class="btn btn-outline-success-modify my-2 my-sm-0"
+                            href="{% url 'accounts:edit' slug=user.profile.slug%}">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="container">
+                {% if my_resevation %}
+                <div class="row mt-4">
+                    <h3 class="p-2 mb-4" style="background-color: #2196f3; border-radius: 0 35px 0 35px;">My Reservation
+                    </h3>
+                    <table class="table">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th scope="col">#</th>
+                                <th style="text-transform: uppercase;" scope="col">Property image</th>
+                                <th style="text-transform: uppercase;" scope="col">Property Name</th>
+                                <th style="text-transform: uppercase;" scope="col">Created At</th>
+                                <th style="text-transform: uppercase;" scope="col">FROM</th>
+                                <th style="text-transform: uppercase;" scope="col">To</th>
+                                <th style="text-transform: uppercase;" scope="col">guest</th>
+                                <th style="text-transform: uppercase;" scope="col">children</th>
+                                <th style="text-transform: uppercase;" scope="col">remove</th>
+                            </tr>
+                        </thead>
+                        {% for resevation in my_resevation %}
+                        <tbody>
+                            <style>
+                                .table th,
+                                .table td {
+                                    vertical-align: middle;
+                                }
+                            </style>
+                            <tr style="text-align: center;">
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td><img style="height: 100px; width: 100px;" src="{{resevation.property.image.url}}"
+                                        alt=""></td>
+                                <td>{{ resevation.property }}</td>
+                                <td>{{ resevation.Created_At }}</td>
+                                <td>{{ resevation.date_from }}</td>
+                                <td>{{ resevation.date_to }}</td>
+                                <td>{{ resevation.guest }}</td>
+                                <td>{{ resevation.children }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        REMOVE
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">REMOVE</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are You Sure To Remove
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <a href="{% url 'accounts:remove_myresevation' resevation.id %}"
+                                                        class="btn btn-primary">REMOVE</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                    <hr>
+                </div>
+                {% else %}
+                <style>
+                    .row120 {
+                        margin-bottom: 20px;
+                    }
+                </style>
+                {% endif %}
+                {% if my_listings %}
+                <div class="row mt-4">
+                    <h3 class="p-2 mb-4" style="background-color: #2196f3;border-radius: 0 35px 0 35px;">My Listing</h3>
+                    <table class="table">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th scope="col">#</th>
+                                <th style="text-transform: uppercase;" scope="col">Property image</th>
+                                <th style="text-transform: uppercase;" scope="col">Property Name</th>
+                                <th style="text-transform: uppercase;" scope="col">category</th>
+                                <th style="text-transform: uppercase;" scope="col">place</th>
+                                <th style="text-transform: uppercase;" scope="col">price</th>
+                                <th style="text-transform: uppercase;" scope="col">Created At</th>
+                                <th style="text-transform: uppercase;" scope="col">remove</th>
+                            </tr>
+                        </thead>
+                        {% for my_listing in my_listings %}
+                        <tbody>
+                            <style>
+                                .table th,
+                                .table td {
+                                    vertical-align: middle;
+                                }
+                            </style>
+                            <tr style="text-align: center;">
+                                <th scope="row">{{forloop.counter}}</th>
+                                <td><img style="height: 100px; width: 100px;" src="{{my_listing.image.url}}" alt="">
+                                </td>
+                                <td>{{ my_listing.name }}</td>
+                                <td>{{ my_listing.category }}</td>
+                                <td>{{ my_listing.place }}</td>
+                                <td>{{ my_listing.price }}</td>
+                                <td>{{ my_listing.created_on }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#exampleModal">
+                                        REMOVE
+                                    </button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">REMOVE</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Are You Sure To Remove
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <a href="{% url 'accounts:remove_mylisting' my_listing.id %}"
+                                                        class="btn btn-primary">REMOVE</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                    <hr>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .info {
+        display: block;
+        text-align: center;
+    }
+
+    .btn-outline-success-modify {
+        border-radius: 5px;
+        color: #ffffff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-outline-success-modify:hover {
+        color: #007bff;
+        background-color: transparent;
+        background-image: none;
+        border-color: #007bff;
+    }
+
+    .profile-imgg {
+        text-align: center;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+
+    .profile-img-defult {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+    }
+</style>
+{% endblock body %}

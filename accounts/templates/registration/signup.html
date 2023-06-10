@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block body %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{% static 'css/main1.css' %}" media="all">
+</head>
+  <style>
+    body{
+      background: linear-gradient(to right, #0062E6, #33AEFF);
+    }
+    .navbar{
+      display: none;
+    }
+    .arrow-leftt{
+      display: flex;
+      position: absolute;
+      margin-top: 5px;
+      margin-left: 5px;
+      background-color: #0062E6;
+      color: aliceblue;
+      height: 25px;
+      width: 25px;
+      padding: 5px;
+      border-radius: 50%;
+    }
+    .arrow-leftt:hover{
+      color: aliceblue;
+      text-decoration: none;
+    }
+    .input-group {
+      margin-bottom: 10px;
+    }
+  </style>
+  <form method="POST">
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4" style="width: 60%; margin: 0 auto;margin-top: 60px">
+              <a class="arrow-leftt" href="{% url 'product:product_list' %}"><i class="fa-sharp fa-solid fa-arrow-left"></i></a>
+                <div class="card-body" style="padding: 30px;">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">Sign Up</h5>
+                    {% if messages %}
+                      {% for message in messages %}
+                          {% if message.tags == 'error' %}
+                              <div class="alert alert-danger" role="alert">{{ message }}</div>
+                          {% elif message.tags == 'success' %}
+                              <div class="alert alert-success" role="alert">{{ message }}</div>
+                          {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                    <form method="POST">
+                      {% csrf_token %}
+                        <div class="row row-space">
+                          <div class="col-12">
+                            <div class="input-group">
+                              <label class="label">full name</label>
+                              <input class="input--style-4" type="text" name="first_name" value="{{first_name}}">
+                            </div>
+                          </div>
+
+                          <div class="col-12">
+                            <div class="input-group">
+                                <label class="label">Email</label>
+                                <input class="input--style-4" type="text" name="email" value="{{email}}">
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <div class="input-group">
+                                <label class="label">Password</label>
+                                <input class="input--style-4" style="    margin-bottom: 0;" type="password" name="password">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="input-group">
+                              <label class="label" style="font-size: 15px;">Password Configration</label>
+                              <input class="input--style-4" style="    margin-bottom: 0;" type="password" name="passwordconfigration">
+                          </div>
+                      </div>
+                        </div>
+                        <div class="p-t-15">
+                          <button name="signup" class="btn btn btn-outline-success-modify  btn-login text-uppercase fw-bold" style="margin-top: 0;margin-bottom: 15px;" type="submit">Sign
+                            up</button>
+                        </div>
+                        <div>
+                          <h5 style="display: contents; font-size:13px;" class="card-title text-center mb-5 fw-light fs-5">Already have an account<a class="nav-link " style="display: inline-flex;" href="{% url 'accounts:signin' %}">Log in</span></a></h5>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </form>
+  <script src="{% static 'js/global.js' %}"></script>
+{% endblock body %}
