@@ -7,6 +7,9 @@ from datetime import datetime
 from django_countries.fields import CountryField
 from django.utils.text import slugify
 from django.db.models.signals import post_save
+from django.contrib.auth.models import AbstractUser, Group, Permission
+
+
 
 class Profile(models.Model):
     user=models.OneToOneField(User, verbose_name=_("user"), on_delete=models.CASCADE)
