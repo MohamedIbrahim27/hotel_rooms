@@ -20,11 +20,11 @@ def place_image_upload(instance,filename):
 
 class Property(models.Model):
     user = models.ForeignKey(User, related_name="property_owner", on_delete=models.CASCADE)
-    name=models.CharField(max_length=100)
+    name=models.CharField(max_length=100,verbose_name=_('name'))
     image=models.ImageField( upload_to=image_upload)
     price=models.IntegerField(default=0)
-    description=models.TextField(max_length=10000)
-    place=models.ForeignKey('Place',related_name='property_place',on_delete=models.CASCADE)
+    description=models.TextField(_('description'),max_length=10000)
+    place=models.ForeignKey('Place',related_name='property_place',on_delete=models.CASCADE,verbose_name=_('place'))
     category=models.ForeignKey('Category',related_name='croperty_category',on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     slug=models.SlugField(blank=True, null=True)

@@ -15,6 +15,6 @@ urlpatterns = [
     
     
     # api
-    path('api/list',PropertyAPiList.as_view(),name='PropertyAPiList'),
-    path('api/list/<int:pk>',PropertyAPiDetail.as_view(),name='PropertyAPiDetail'),
+    path('property/list',PropertyAPiList.as_view(),name='PropertyAPiList'),
+    path('property/list/<int:pk>',PropertyAPiDetail.as_view(),name='PropertyAPiDetail'),
 ]

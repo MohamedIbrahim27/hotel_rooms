@@ -12,13 +12,13 @@ def image_upload(instance,filename):
     return "postimg/%s.%s"%(instance.slug,extension)
 
 class Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title=models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,verbose_name=_('user'))
+    title=models.CharField(max_length=100,verbose_name=_('title'))
     tag = TaggableManager()
     image=models.ImageField(upload_to=image_upload)
-    created_on=models.DateField(default=timezone.now)
+    created_on=models.DateField(_('created_on'),default=timezone.now)
     description=models.TextField(max_length=10000)
-    category=models.ForeignKey('Category',related_name='postcategory',on_delete=models.CASCADE)
+    category=models.ForeignKey('Category',related_name='postcategory',on_delete=models.CASCADE,verbose_name=_('category'))
     slug=models.SlugField(blank=True, null=True)
     
     def save(self, *args, **kwargs):
