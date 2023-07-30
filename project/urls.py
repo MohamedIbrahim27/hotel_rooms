@@ -39,7 +39,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
     path('',include('property.urls' ,namespace='property')),
     path('',include('settings.urls' ,namespace='settings')),
@@ -55,8 +55,6 @@ urlpatterns = [
     re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
 
-admin.site.site_header = "Book Administration"
-admin.site.site_title = "book-Administration"
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

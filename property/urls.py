@@ -12,6 +12,7 @@ urlpatterns = [
     # path('hotel/search',views.search,name='search'),
     path('hotel/',PropertyList.as_view(),name='property_list'),
     path('hotel/<slug:slug>',PropertyDetail.as_view(),name='property_detail'),
+    path('create/',PropertyCreate.as_view(),name='property_create'),
     
     
     # api

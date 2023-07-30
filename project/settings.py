@@ -12,10 +12,22 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-
+from .juzmin import JAZZMIN_SETTINGS
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+JAZZMIN_UI_TWEAKS = {
+    
+    "dark_mode_theme": "darkly",
+    # "theme": "darkly",
+    # "theme": "slate",
+    "theme": "solar",
+    "navbar": "navbar-dark",
+    "brand_colour": "navbar-white",
+    "accent": "accent-warning",
+    "sidebar_nav_compact_style": True,
+}
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -51,6 +63,7 @@ INSTALLED_APPS = [
     'about',
     'settings',
     'django_summernote',
+    'bootstrap4',
     
     'rest_framework',
     'rest_framework.authtoken',

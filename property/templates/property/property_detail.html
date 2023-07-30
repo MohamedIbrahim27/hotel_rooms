@@ -52,105 +52,45 @@
                         <h4 class="mb-4">Take A Tour</h4>
                         <div class="block-16">
                             <figure>
-                                <img src="images/hotel-6.jpg" alt="Image placeholder" class="img-fluid">
-                                <a href="https://vimeo.com/45830194" class="play-button popup-vimeo"><span
-                                        class="icon-play"></span></a>
+                                <img src="{{object.image.url}}" alt="Image placeholder" class="img-fluid">
                             </figure>
                         </div>
                     </div>
                     <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
                         <h4 class="mb-4">Our Rooms</h4>
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="destination">
-                                    <a href="hotel-single.html" class="img img-2"
-                                        style="background-image: url(images/room-4.jpg);"></a>
-                                    <div class="text p-3">
-                                        <div class="d-flex">
-                                            <div class="one">
-                                                <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                                                <p class="rate">
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star-o"></i>
-                                                    <span>8 Rating</span>
-                                                </p>
+                            {% for property in filter_by_room %}
+                                <div class="col-md-4">
+                                    <div class="destination">
+                                        <a href="{{property.get_absolute_url}}" class="img img-2"
+                                            style="background-image: url({{property.image.url}});"></a>
+                                        <div class="text p-3">
+                                            <div class="d-flex">
+                                                <div class="one">
+                                                    <h3><a href="{{property.get_absolute_url}}">{{property}}</a></h3>
+                                                    <p class="rate">
+                                                        <i class="icon-star"></i>
+                                                        <i class="icon-star"></i>
+                                                        <i class="icon-star"></i>
+                                                        <i class="icon-star"></i>
+                                                        <i class="icon-star-o"></i>
+                                                        <span>8 Rating</span>
+                                                    </p>
+                                                </div>
+                                                <div class="two">
+                                                    <span class="price per-price">${{property.price}}<br><small>/night</small></span>
+                                                </div>
                                             </div>
-                                            <div class="two">
-                                                <span class="price per-price">$40<br><small>/night</small></span>
-                                            </div>
+                                            <p>{{property.description|striptags|truncatewords:6}}</p>
+                                            <hr>
+                                            <p class="bottom-area d-flex">
+                                                <span><i class="icon-map-o"></i>{{property.place}}</span>
+                                                <span class="ml-auto"><a href="#">Book Now</a></span>
+                                            </p>
                                         </div>
-                                        <p>Far far away, behind the word mountains, far from the countries</p>
-                                        <hr>
-                                        <p class="bottom-area d-flex">
-                                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                                        </p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="destination">
-                                    <a href="hotel-single.html" class="img img-2"
-                                        style="background-image: url(images/room-5.jpg);"></a>
-                                    <div class="text p-3">
-                                        <div class="d-flex">
-                                            <div class="one">
-                                                <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                                                <p class="rate">
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star-o"></i>
-                                                    <span>8 Rating</span>
-                                                </p>
-                                            </div>
-                                            <div class="two">
-                                                <span class="price per-price">$40<br><small>/night</small></span>
-                                            </div>
-                                        </div>
-                                        <p>Far far away, behind the word mountains, far from the countries</p>
-                                        <hr>
-                                        <p class="bottom-area d-flex">
-                                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="destination">
-                                    <a href="hotel-single.html" class="img img-2"
-                                        style="background-image: url(images/room-6.jpg);"></a>
-                                    <div class="text p-3">
-                                        <div class="d-flex">
-                                            <div class="one">
-                                                <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-                                                <p class="rate">
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star"></i>
-                                                    <i class="icon-star-o"></i>
-                                                    <span>8 Rating</span>
-                                                </p>
-                                            </div>
-                                            <div class="two">
-                                                <span class="price per-price">$40<br><small>/night</small></span>
-                                            </div>
-                                        </div>
-                                        <p>Far far away, behind the word mountains, far from the countries</p>
-                                        <hr>
-                                        <p class="bottom-area d-flex">
-                                            <span><i class="icon-map-o"></i> Miami, Fl</span>
-                                            <span class="ml-auto"><a href="#">Book Now</a></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                     
@@ -170,51 +110,66 @@
                     <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
                         <h4 class="mb-5">Check Availability &amp; Booking</h4>
                         <div class="fields">
-                            <form method="POST">
-                                {% csrf_token %}
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input name="date_from" required="ture" type="text" id="checkin_date" class="form-control"
-                                                placeholder="Date from">
+                            {% if user.is_authenticated %}
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input name="date_from" required="ture" type="text" id="checkin_date" class="form-control"
+                                                    placeholder="Date from">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <input name="date_to" required="ture" type="text" id="checkin_date" class="form-control" placeholder="Date to">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input name="date_to" required="ture" type="text" id="checkin_date" class="form-control" placeholder="Date to">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="select-wrap one-third">
-                                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                <select name="guest" id="" class="form-control" placeholder="Guest">
-                                                    {% for count_choice in count_choices_gu %}
-                                                        <option value="{{ count_choice.0 }}" name="cuest">{{count_choice.0}}</option>
-                                                    {% endfor %}
-                                                </select>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="select-wrap one-third">
+                                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                                    <select name="guest" id="" class="form-control" placeholder="Guest">
+                                                        {% for count_choice in count_choices_gu %}
+                                                            <option value="{{ count_choice.0 }}" name="cuest">{{count_choice.0}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="select-wrap one-third">
+                                                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                                                    <select name="children" id="" class="form-control" placeholder="Children">
+                                                        {% for count_choice in count_choices_ch %}
+                                                            <option value="{{ count_choice.0 }}" name="children">{{count_choice.0}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="Check Availability" class="btn btn-primary py-3">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="select-wrap one-third">
-                                                <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                <select name="children" id="" class="form-control" placeholder="Children">
-                                                    {% for count_choice in count_choices_ch %}
-                                                        <option value="{{ count_choice.0 }}" name="children">{{count_choice.0}}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <input type="submit" value="Check Availability" class="btn btn-primary py-3">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            {% else %}
+                                <h4 class="mb-5">You must be login to be able book ! <a href="{% url 'accounts:login' %}" style="    color: #fff !important;
+                                    background: #f85959;
+                                    border: none !important;
+                                    padding-top: 0.5rem !important;
+                                    padding-bottom: 0.5rem !important;
+                                    padding-left: 20px;
+                                    padding-right: 20px;
+                                    margin-top: 6px !important;
+                                    -webkit-border-radius: 30px;
+                                    -moz-border-radius: 30px;
+                                    -ms-border-radius: 30px;
+                                    border-radius: 30px;"><span>Log In</span></a></h4>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
@@ -272,12 +227,12 @@
                             {% for property in related %}
                                 <div class="col-md-4">
                                     <div class="destination">
-                                        <a href="hotel-single.html" class="img img-2"
+                                        <a href="{{property.get_absolute_url}}" class="img img-2"
                                             style="background-image: url({{property.image.url}});"></a>
                                         <div class="text p-3">
                                             <div class="d-flex">
                                                 <div class="one">
-                                                    <h3><a href="hotel-single.html">{{property}}</a></h3>
+                                                    <h3><a href="{{property.get_absolute_url}}">{{property}}</a></h3>
                                                     <p class="rate">
                                                         <i class="icon-star"></i>
                                                         <i class="icon-star"></i>

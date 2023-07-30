@@ -10,7 +10,10 @@ class UserAdmin(UserAdmin):
             return ['password','date_joined','last_login']
         else:
             return []
-        
+class ProfileAdmin(admin.ModelAdmin):
+    list_display= ['user','country','phone']
+    list_filter=['country',]
+    search_fields=['user__username',]
 admin.site.unregister(User)
 admin.site.register(User,UserAdmin)
-admin.site.register(Profile)
+admin.site.register(Profile,ProfileAdmin)
