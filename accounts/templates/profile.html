@@ -24,14 +24,16 @@ SOUQ/Profile/{{profile.user.username}}
                 <div class="row mt-5">
                     <div class="profile-imgg col-md-12">
                         {% if profile.image %}
-                        <img class="profile-img" src="{{profile.image.url}}" alt="card-img-top">
+                        <img class="profile-img" style="    object-fit: cover;
+                        border: 3px solid;" src="{{profile.image.url}}" alt="card-img-top">
                         {% else %}
-                        <img class="profile-img-defult" src="{% static 'img/user_no_image.png' %}" alt="card-img-top">
+                        <img class="profile-img-defult" src="{% static 'images/user_no_image.png' %}" alt="card-img-top">
 
                         {% endif %}
 
                     </div>
                     <div class="info mt-4 col-md-12">
+                        <h6><i class="fa-solid fa-envelope"></i> User Name : {{profile.user.username}}
                         <h6><i class="fa-solid fa-signature"></i> Name : {{profile.user.first_name}}
                             {{profile.user.last_name}} </h6>
                         <h6><i class="fa-solid fa-envelope"></i> Email : {{profile.user.email}} </h6>

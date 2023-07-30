@@ -42,7 +42,7 @@
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     {% if user.is_authenticated and user.is_staff %}
-                        <li class="nav-item mr-5"><a href="{% url 'admin:index' %}" target="_blank" class="nav-link">Admin</a></li>
+                        <li class="nav-item mr-1"><a href="{% url 'admin:index' %}" target="_blank" class="nav-link">Admin</a></li>
                     {% endif %}
                     {% if user.is_authenticated %}
                         <li class="nav-item mr-5"><a href="{% url 'accounts:profile' slug=user.profile.slug %}" target="_blank" class="nav-link">Profile</a></li>
@@ -52,8 +52,27 @@
                     <li class="nav-item"><a href="{% url 'property:property_list' %}" class="nav-link">Hotels</a></li>
                     <li class="nav-item"><a href="{% url 'blog:post_list' %}" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="{% url 'settings:contact_us' %}" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
-                </ul>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item cta"><a href="{% url 'property:property_create' %}" class="nav-link"><span>Add listing</span></a></li>
+                        <li style="    display: flex;
+                        align-items: center;">
+                            <p style="    color: black;
+                            background: wheat;
+                            padding: 7px;
+                            border-radius: 10px;
+                            margin-bottom: 0;
+                            margin-left: 10px;
+                            height: 35px;
+                            text-align: center;
+                            justify-content: center;
+                            align-items: center;
+                            display: flex;">Wellcome {{user.first_name}}</p>
+                        </li>
+                        <li class="nav-item"><a href="{% url 'accounts:log_out' %}" class="nav-link">Log Out</a></li>
+                    {% else %}
+                        <li class="nav-item cta"><a href="{% url 'accounts:login' %}" class="nav-link"><span>Log In</span></a></li>
+                    {% endif %}
+                    </ul>
             </div>
         </div>
     </nav>

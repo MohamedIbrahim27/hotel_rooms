@@ -83,3 +83,4 @@ class AddComment(models.Model):
 
     def __str__(self):
         return  'User: ' +  self.user.username + ' --> post: ' + str(self.property)
+

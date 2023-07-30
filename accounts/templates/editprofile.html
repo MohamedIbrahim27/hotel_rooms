@@ -48,7 +48,7 @@
                 <div class="alert alert-success" role="alert">{{message}}</div>
             {% endfor %}
         {% endif %}
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row row-space">
                 <div class="col-6 mt-5">
@@ -62,17 +62,19 @@
                                     <label class="profile-label"> Profile Image </label><br><br>
                                     {% if image  %}
                                         <img class="profile-img mb-5" width="110" height="100" style="margin: 0 auto;
-                                        display: flex;width: 200px; height: 200px;border-radius: 50%; " src="{{ image.url }}" name="image" alt="card-img-top">
+                                        display: flex;width: 200px; height: 200px;border-radius: 50%;object-fit: cover;
+                                        border: 3px solid; " src="{{ image.url }}" name="image" alt="card-img-top">
                                     {% else %}
                                         <img width="110" height="100" style="margin: 0 auto;
                                         display: flex;width: 200px; height: 200px;"
                                         class = "pimg" name="image" src="{% static 'images/user_no_image.png' %}">
                                     {% endif %}
                                 </div>
-                                <label class = "upload" style="width: 35%;
+                                <label class = "upload" style="width: 40%;
+                                display: flex;
                                 margin: 0 auto;">
                                 select image
-                                <input type="file" name="image" value="{{ image.url }}" class="form-control file">
+                                <input type="file" name="image" value="{{ image }}" class="form-control file">
                                 </label>
                             </div>
                             <div class="row row-space">
